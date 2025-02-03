@@ -70,7 +70,7 @@ npm start
 The application will run on `http://localhost:3000`
 
 ## Smart Contract
-- **Contract Address**: `0xYourContractAddress`
+- **Contract Address**: `0x22a01749E0C916c859B584528D37e838A8a8eba7`
 - **ABI**: Located in `src/contracts/Crowdfund.json`
 - Key Functions:
   ```solidity

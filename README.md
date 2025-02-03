@@ -149,4 +149,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 **Developer**: Gethsun Misesi  
 **Contact**: gethsun09@gmail.com
-**Project Link**: https://github.com/your-username/crowdfunding-dapp
+**Project Link**: https://kibokodao-africa.github.io/crowd-funding-dapp/

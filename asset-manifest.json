@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/crowd-funding-dapp/static/css/main.e6c13ad2.css",
+    "main.js": "/crowd-funding-dapp/static/js/main.b4fc18dc.js",
+    "index.html": "/crowd-funding-dapp/index.html",
+    "main.e6c13ad2.css.map": "/crowd-funding-dapp/static/css/main.e6c13ad2.css.map",
+    "main.b4fc18dc.js.map": "/crowd-funding-dapp/static/js/main.b4fc18dc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.b4fc18dc.js"
+  ]
+}

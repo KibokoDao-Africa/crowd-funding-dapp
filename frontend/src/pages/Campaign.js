@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { useParams } from 'react-router-dom';
+import { formatEther, parseEther } from "ethers"; 
 import { 
   Button, 
   Card, 
@@ -34,8 +35,8 @@ function Campaign({ contract, account }) {
         setCampaign({
           id: campaignId,
           owner: campaignData.owner,
-          goal: ethers.utils.formatEther(campaignData.goal),
-          raised: ethers.utils.formatEther(campaignData.raised),
+          goal: formatEther(campaignData.goal),
+          raised: formatEther(campaignData.raised),
           deadline: new Date(campaignData.deadline * 1000),
           description: campaignData.description,
           fundsWithdrawn: campaignData.fundsWithdrawn
@@ -58,8 +59,8 @@ function Campaign({ contract, account }) {
       if (id.toString() === campaignId) {
         setCampaign(prev => ({
           ...prev,
-          raised: ethers.utils.formatEther(
-            ethers.BigNumber.from(ethers.utils.parseEther(prev.raised)).add(amount)
+          raised: formatEther(
+            0n(parseEther(prev.raised)).add(amount)
           )
         }));
       }
@@ -77,7 +78,7 @@ function Campaign({ contract, account }) {
       setDonationLoading(true);
       setError('');
       const tx = await contract.donate(campaignId, {
-        value: ethers.utils.parseEther(amount)
+        value: parseEther(amount)
       });
       await tx.wait();
       setAmount('');

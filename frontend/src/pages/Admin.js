@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { formatEther, parseEther } from "ethers";
 import {
   Box,
   Card,
@@ -18,9 +18,8 @@ import {
   TableRow,
   Paper
 } from '@mui/material';
-import EventIcon from '@mui/icons-material/Event';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../contracts/config';
+
+
 
 // Add your admin addresses here
 const ADMIN_ADDRESSES = ['0x3535448e2AAa9EfB9F575F292C904d383EDa9352', '0xf672e2b5b3072b7ee79e3bddcf5907032c8d0c74'];
@@ -45,15 +44,15 @@ function Admin({ contract, account }) {
         setLoading(true);
         const count = await contract.campaignCount();
         const campaigns = [];
-        let total = ethers.BigNumber.from(0);
+        let total = 0n;
         
         for (let i = 0; i < count; i++) {
           const c = await contract.campaigns(i);
           campaigns.push({
             id: i,
             owner: c.owner,
-            goal: ethers.utils.formatEther(c.goal),
-            raised: ethers.utils.formatEther(c.raised),
+            goal: formatEther(c.goal),
+            raised: formatEther(c.raised),
             deadline: new Date(c.deadline * 1000),
             description: c.description,
             withdrawn: c.fundsWithdrawn
@@ -62,7 +61,7 @@ function Admin({ contract, account }) {
         }
         
         setAllCampaigns(campaigns);
-        setTotalRaised(ethers.utils.formatEther(total));
+        setTotalRaised(formatEther(total));
         setLoading(false);
       } catch (err) {
         setError('Failed to load campaign data');

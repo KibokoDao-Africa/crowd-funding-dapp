@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { useState} from 'react';
+import { parseEther } from "ethers";
 import {
   Button,
   TextField,
@@ -12,7 +12,6 @@ import {
 } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../contracts/config';
 import { useNavigate } from 'react-router-dom';
 
 function CreateCampaign({ contract, account, connectWallet }) {
@@ -47,7 +46,7 @@ function CreateCampaign({ contract, account, connectWallet }) {
       }
 
       const tx = await contract.createCampaign(
-        ethers.utils.parseEther(goal.toString()),
+        parseEther(goal.toString()),
         deadlineTimestamp,
         description
       );

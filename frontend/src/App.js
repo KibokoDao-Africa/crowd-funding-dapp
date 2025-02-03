@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from './contracts/config';
 import Home from './pages/Home';
 import CreateCampaign from './pages/Create';
 import Campaign from './pages/Campaign';
 import Admin from './pages/Admin';
-import { AppBar, Toolbar, Button, Container, CircularProgress } from '@mui/material';
+import { AppBar, Toolbar, Button, Container, CircularProgress, Typography } from '@mui/material';
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -18,14 +18,9 @@ function App() {
     const init = async () => {
       if (window.ethereum) {
         try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const contract = new ethers.Contract(
-            CONTRACT_ADDRESS,
-            CONTRACT_ABI,
-            provider.getSigner()
-          );
-          
-          // Check if already connected
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
           const accounts = await provider.listAccounts();
           if (accounts.length > 0) setAccount(accounts[0]);
 
@@ -70,6 +65,9 @@ function App() {
     <Router>
       <AppBar position="static">
         <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            Crowd Funding Dapp
+          </Typography>
           <Button color="inherit" component={Link} to="/">
             Home
           </Button>
@@ -79,7 +77,6 @@ function App() {
           <Button color="inherit" component={Link} to="/admin">
             Admin
           </Button>
-          <div style={{ flexGrow: 1 }} />
           {account ? (
             <Button color="inherit">
               {`${account.slice(0, 6)}...${account.slice(-4)}`}

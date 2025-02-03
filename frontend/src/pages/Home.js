@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { formatEther} from "ethers";
 import {
   Button,
   Card,
@@ -39,8 +39,8 @@ function Home({ contract, account, connectWallet }) {
           campaigns.push({
             id: i,
             owner: c.owner,
-            goal: ethers.utils.formatEther(c.goal),
-            raised: ethers.utils.formatEther(c.raised),
+            goal: formatEther(c.goal),
+            raised:formatEther(c.raised),
             deadline: new Date(c.deadline * 1000),
             description: c.description
           });
